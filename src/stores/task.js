@@ -17,11 +17,19 @@ export const useTaskStore = defineStore('task', () => {
     tasks.value = tasks.value.filter((task) => task.id !== id)
   }
 
+  function updateTask(id, updatedTask) {
+    const index = tasks.value.findIndex((task) => task.id === id)
+    if (index !== -1) {
+      tasks.value[index] = { ...tasks.value[index], ...updatedTask }
+    }
+  }
+
   return {
     tasks,
     taskCount,
     pendingTasks,
     addTask,
     deleteTask,
+    updateTask,
   }
 })
